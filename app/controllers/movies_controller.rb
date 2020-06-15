@@ -24,37 +24,29 @@ class MoviesController < ApplicationController
   def create
     @movie = current_user.movies.build(movie_params)
 
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
-        format.json { render :show, status: :created, location: @movie }
-      else
-        format.html { render :new }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+    if @movie.save
+      redirect_to movie_path(@movie), notice: 'You have seccessfully created a movie!!'
+    else
+      render :new
     end
   end
+
+    
 
 
   def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
-        format.json { render :show, status: :ok, location: @movie }
-      else
-        format.html { render :edit }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: 'Movie was successfully updated.' 
+     else
+      render :edit 
+    
+     end
+   end
 
 
   def destroy
     @movie.destroy
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to movies_path
   end
 
   private
