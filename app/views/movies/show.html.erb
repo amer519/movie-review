@@ -41,8 +41,9 @@
       <% else  %>
         <% @reviews.each do |review| %>
           <div class="reviews">
-          <p><%= review.rating %></p>
+          <p>Rating:<%= review.rating %></p>
           <p><%= review.comment %></p>
+          
           </div>
         <% end %>
       <% end %>
@@ -58,3 +59,5 @@
 
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
 <%= link_to 'Back', movies_path %>
+
+
